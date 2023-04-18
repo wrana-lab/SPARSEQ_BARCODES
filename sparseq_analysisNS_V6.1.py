@@ -15,6 +15,8 @@ def main():
     parser = argparse.ArgumentParser(description = 'This outputs an alignment file for each amplicon and \'important_vars_detailed_v3.txt\'. This important_vars file is what quickly tells us if there is a variant')
     parser.add_argument('run_folder', help = 'Full path of run folder with fastq list file')
     parser.add_argument('resource_folder', help = 'Full path of SPAR Seq resource folder')
+    #parser.add_argument('--start', help='Stage to start in [select_vars|all_top|bowtie_count|variant_agg] Default: select_vars')
+    #parser.add_argument('--intermediates', help = 'Keep Intermediates [Y|N] DEFAULT: N') #Optional argument: --intermediates option
     args = parser.parse_args()  #Needed for args to be recognized
 
     args.run_folder = os.path.abspath(args.run_folder) #abspath
@@ -63,6 +65,7 @@ def main():
     bctable_fileR1.write("samples")
     bctable_fileR2 = open(args.run_folder+"/results/R2UMI_count_table_"+version+".txt", "w") #fileout
     bctable_fileR2.write("samples")
+
 
     #generating workbook in parallel
     #.active sets active sheet in excel file
@@ -191,11 +194,16 @@ def main():
     counts_wbR2.save(filename = counts_wbnameR2) #save wb
 
     #open bc2 counts csv files
+
     bc2_table = pd.read_excel(counts_wbnameR2, header=0)
+
     #reorder bc2_table
-    bc2_table = bc2_table[['sample', 'well','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','__not_aligned','filename']]
+    bc2_table = bc2_table[['sample', 'well',	'1', '2', '3',	'4', '5',	'6',	'7',	'8',	'9', '10', '11', '12',	'13',	'14',	'15',	'16',	'17',	'18',	'19',	'20',	'21',	'22',	'23',	'24', '__not_aligned', 'filename']]
+
     counts_wbnameR2_reordered = args.run_folder+"/results/"+runID+"_R2UMI_Table_Reordered.xlsx"
+
     bc2_table.to_excel(counts_wbnameR2_reordered,  sheet_name='Reordered', index=False)
+
 
     print("\t\t\t> R1 and R2 UMI bowtie_count now complete...")
 

@@ -15,7 +15,8 @@ def main():
     parser = argparse.ArgumentParser(description = 'This outputs an alignment file for each amplicon and \'important_vars_detailed_v3.txt\'. This important_vars file is what quickly tells us if there is a variant')
     parser.add_argument('run_folder', help = 'Full path of run folder with fastq list file')
     parser.add_argument('resource_folder', help = 'Full path of SPAR Seq resource folder')
-
+    #parser.add_argument('--start', help='Stage to start in [select_vars|all_top|bowtie_count|variant_agg] Default: select_vars')
+    #parser.add_argument('--intermediates', help = 'Keep Intermediates [Y|N] DEFAULT: N') #Optional argument: --intermediates option
     args = parser.parse_args()  #Needed for args to be recognized
 
     args.run_folder = os.path.abspath(args.run_folder) #abspath
@@ -90,15 +91,19 @@ def main():
 
     counterone = 0
     while counterone < len(input_file_setR1):
+    #for itemnum in len(input_file_setR1):
 
+        #it+=1
         r1file = input_file_setR1[counterone]
         r2file = input_file_setR2[counterone]
 
         countfilepathR1 = args.run_folder+"/R1andR2_files/"+r1file
         countfilepathR2 = args.run_folder+"/R1andR2_files/"+r2file
 
+        #print("processing file pair " + str(counterone+1) + "\n" + r1file + "\n" + r2file)
 
         #Using regex to parse sampleID; include well to account for duplicates e.g. 6062021_H2O-multi_S41_R2C3_23M_S41_R1_001.fastq
+        #matches = re.match(r'(.*?)_(.*?)_S.{1,4}_.*?_(.{2,3})_.*', filename)
         matches = re.match(r'(.*?)_(.*?)_S.{1,4}_.*?_(.{2,3})_.*?_.*', r1file)
         date = matches.group(1)
         sampleID = matches.group(2)
@@ -142,6 +147,8 @@ def main():
                     if givenwell not in welldict : welldict[givenwell] = 1
                     else : welldict[givenwell] = 1+welldict[givenwell]
 
+
+
                 if it%4 == 1 and idlineR1 != idlineR2:
                     print("Read pair error in files " + r1file + "and" + r2file)
 
@@ -155,9 +162,15 @@ def main():
         f2.close()
         counterone+=1
 
+
     bcoutput_file.close()
     counts_wb.save(filename = counts_wbname) #save wb
     print("\t\t\t> R1 and R2 UMI analysis now complete...")
 
 
 main()
+
+
+
+
+#ACTGAATATAAACCAACTGTTCGTTTAGCAACTCGTGATGATGTTCCACGTGCAGTTCGTACTTTAGCAGCAGCATTTGCAGATTATCCAGCAACTCGTCATACTGTTGATCCAGATCGTCATATTGAACGTGTTACTGAATTACAAGAATTATTTTTAACTCGTGTTGGTTTAGATATTGGTAAAGTTTGGGTTGCAGATGATGGTGCAGCAGTTGCAGTTTGGACTACTCCAGAATCTGTTGAAGCAGGTGCAGTTTTTGCAGAAATTGGTCCACGTATGGCAGAATTATCTGGTTCTCGTTTAGCAGCACAACAACAAATGGAAGGTTTATTAGCACCACATCGTCCAAAAGAACCAGCATGGTTTTTAGCAACTGTTGGTGTTTCTCCAGATCATCAAGGTAAAGGTTTAGGTTCTGCAGTTGTTTTACCAGGTGTTGAAGCAGCAGAACGTGCAGGTGTTCCAGCATTTTTAGAAACTTCTGCACCACGTAATTTACCATTTTATGAACGTTTAGGTTTTACTGTTACTGCAGATGTTGAAGTTCCAGAAGGTCCACGTACTTGGTGTATGACTCGTAAACCAGGTGCATAA
