@@ -2,6 +2,8 @@
 Sub-version of SPARseq pipeline designed to handle specialized paired-end data with 5bp barcodes for tracking well-to-well spread of reads.  Outputs the same files as the normal SPARseq pipeline with additional outputs related to the barcode contents per sample. 
 
 
+Part 1: Barcode analysis
+
 Requirements:
 
 OSX or Linux system
@@ -38,3 +40,36 @@ Script to process pairs of reads and match up R1 and R2 barcodes to check well i
 
 
 
+
+Part 2: sequence analysis of barcoded data.
+
+Extension of SPARSeq barcode pipeline to detect possible quasispecies with paired end reads.
+
+Requirements:
+
+OSX or Linux system
+
+Python3.9 [https://www.python.org/]
+
+Clustal Omega running locally [http://www.clustal.org/omega/]
+
+R v4.2.2 [https://cran.r-project.org/]
+
+Workflow
+
+quasispecies_wrapper_v3_barcode.sh
+Wrapper script for the QS analysis pipeline. Unzips fastq files, writes list of filenames, executes sequence pileup script, executes clustal omega locally for alignment and conversion to aligned fasta, executes fasta cut/trim script, then re-zips fastq files and reports run time. 
+
+sparseq_srbdv2.py
+Initial processing script for raw fastq files. It processes pairs of fastq files by checking for matching read IDs, checking that the R1 and R2 barcodes match the sample's well in the 384w plate, then selecting, binning, and counting Srbdv2 sequences. Next it uses the kneed library to fit a knee plot model to determine an appropriate count cutoff value for the sample, which is used to filter the sequences within the sample. If no knee point is found it uses a count cutoff value of 0.5% (based on total Srbdv2 counts). Sequences passing the cutoffs are written to a .fa file.
+
+Clustal Omega is used locally to align sequences that passed the cutoffs and convert to an aligned .fasta file.
+
+fasta_cutter_barcode_v3.py
+
+This script takes the aligned .fasta file and organizes the sequences, and outputs a file that has the base for each position for each sequence. This output is used later to determine the contents of each position in the Srbdv2 sequence.
+
+quasispecies_barcode.R
+This script takes aligned sequences and translates them, outputting the sequences with a reference sequence for easy viewing in snapgene.
+
+Run final output from r through clustal omega locally again to get finalized alignments of top aggregated sequences. This can be opened in snapGene for visualization.
