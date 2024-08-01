@@ -5,10 +5,15 @@ This is the pipeline for testing barcoded clinical samples to assess barcode con
 
 
 Requirements:
+
 Python3 [https://www.python.org/] [os, argparse, re, openpyxl, pandas, datetime]
+
 Bowtie 0.12.7 [http://bowtie-bio.sourceforge.net/index.shtml]
+
 HTSeq 0.13.5 [https://htseq.readthedocs.io/en/master/]
+
 Cutadapt 3.4 [https://cutadapt.readthedocs.io/en/stable/]
+
 Tested on MacOS 12.7.5
 
 The run folder and resource folder must be subfolders of the same parent folder:
