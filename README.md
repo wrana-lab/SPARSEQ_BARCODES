@@ -91,10 +91,10 @@ Instructions for one run:
 			>runs sparseq_analysisNS_V5.1.py for usual clinical processing
 				>Creates samcounts directory then runs bowtie and HTseq
 				>Creates results directory then run Clinical_V2_sparseq_analysis_V1.3.2 which outputs several key results tables which are compared to the outputs from the matching clinical run to confirm consistency
-					-runcl31_AllVariantDetails.xlsx
-					-runcl31_CountTable.xlsx
-					-runcl31_SelectedVariants.xlsx
-					-sparseq_report_runcl31.xlsx
+					-runclXX_AllVariantDetails.xlsx
+					-runclXX_CountTable.xlsx
+					-runclXX_SelectedVariants.xlsx
+					-sparseq_report_runclXX.xlsx
 					-please note that as in the clinical pipeline variant calling is manually completed by a supervisor based on review of the 4 outputs 
 3. Run $bash sparseq_pipelineNS_V6.sh path/to/run/folder/runclXX path/to/resource/folder
 		> Wrapper script performs the following:
@@ -105,9 +105,9 @@ Instructions for one run:
 			>runs sparseq_analysisNS_V7.1.py
 			*****In this portion of the analysis some reads can be skipped with the warning "read pair error" which is normal.
 			>Key outputs from this step include
-				>runcl31_R2BC_Table_Reordered.xlsx which has counts of R2 barcodes per sample/well
-				>runcl31_R1BC_Table.xlsx which has counts of R1 barcodes per sample/well
-				>runcl31_BC_PairedAnalysis.xlsx which has combined counts of R1 and R2 barcode pairs per sample
+				>runclXX_R2BC_Table_Reordered.xlsx which has counts of R2 barcodes per sample/well
+				>runclXX_R1BC_Table.xlsx which has counts of R1 barcodes per sample/well
+				>runclXX_BC_PairedAnalysis.xlsx which has combined counts of R1 and R2 barcode pairs per sample
 ```
 
 
