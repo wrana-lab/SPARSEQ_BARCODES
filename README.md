@@ -2,8 +2,6 @@
 Sub-version of SPARseq pipeline designed to handle specialized paired-end data with 5bp barcodes for tracking well-to-well spread of reads.  Outputs the same files as the normal SPARseq pipeline with additional outputs related to the barcode contents per sample. 
 
 
-Part 1: Barcode analysis
-
 Requirements:
 
 OSX or Linux system
