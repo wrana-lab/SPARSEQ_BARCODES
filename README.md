@@ -66,17 +66,17 @@ BCrowmatch.csv and BCcolmatch.csv contain tables of barcodes used per row and co
 Initial one-time steps:
 
 Build normal clinical bowtie index from within the bowtie_index folder with 
-
+```
 bowtie-build clinical_V2_sparsq_V1p2_amplicons.fa clinical_V2_sparsq_V1p2_amplicons
-
+```
 Build R1 barcode bowtie index from within the bowtie_index_R1_barcode folder with
-
+```
 bowtie-build sparsq_R1_barcode_amplicons.fa sparsq_R1_barcode_amplicons
-
+```
 Build R2 barcode bowtie index from within the bowtie_index_R2_barcode folder with
-
+```
 Bowtie-build sparsq_R2_barcode_amplicons.fa sparsq_R2_barcode_amplicon
-
+```
 
 
 Instructions for one run:
