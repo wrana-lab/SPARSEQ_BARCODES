@@ -1,5 +1,5 @@
 # SPARSEQ_BARCODES
-Sub-version of SPARseq pipeline designed to handle specialized paired-end data with 5bp barcodes for tracking well-to-well spread of reads.  Outputs the same files as the normal SPARseq pipeline with additional outputs related to well barcodes. 
+
 
 This is the pipeline for testing barcoded clinical samples to assess barcode contamination across wells. It is a sub-version of SPARseq pipeline designed to handle specialized paired-end data with 5bp barcodes for tracking well-to-well spread of reads. Outputs the same files as the normal SPARseq pipeline with additional outputs related to the barcode contents per sample.
 
