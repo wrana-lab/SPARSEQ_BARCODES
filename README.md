@@ -14,6 +14,13 @@ HTSeq 0.13.5 [https://htseq.readthedocs.io/en/master/]
 
 Cutadapt 3.4 [https://cutadapt.readthedocs.io/en/stable/]
 
+It is recommended to add Bowtie and HTSeq to your environment $PATH or you will have to adjust the .sh scripts to include your PATH for bowtie and HTSeq calls.
+
+It is recommended to use pip for certain packages such as HTSeq and CutAdapt: to install packages for python3 run
+```
+pip install --user [package]
+```
+
 Tested on MacOS 12.7.5
 
 The run folder and resource folder must be subfolders of the same parent folder:
@@ -80,7 +87,7 @@ bowtie-build sparsq_R1_barcode_amplicons.fa sparsq_R1_barcode_amplicons
 ```
 Build R2 barcode bowtie index from within the bowtie_index_R2_barcode folder with
 ```
-Bowtie-build sparsq_R2_barcode_amplicons.fa sparsq_R2_barcode_amplicon
+bowtie-build sparsq_R2_barcode_amplicons.fa sparsq_R2_barcode_amplicon
 ```
 
 
