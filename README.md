@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/629643284.svg)](https://doi.org/10.5281/zenodo.14182212)
+
 # SPARSEQ_BARCODES
 
 
